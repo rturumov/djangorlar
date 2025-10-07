@@ -1,1 +1,1 @@
-# djangorlar
+![Database Schema](dbScheme.png)
