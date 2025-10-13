@@ -1,6 +1,7 @@
 from django.db import models
+from abstracts.models import AbstractSoftDeletableModel
 
-class Restaurant(models.Model):
+class Restaurant(AbstractSoftDeletableModel):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
 
@@ -8,21 +9,21 @@ class Restaurant(models.Model):
         return self.name
 
 
-class Category(models.Model):
+class Category(AbstractSoftDeletableModel):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
 
 
-class Option(models.Model):
+class Option(AbstractSoftDeletableModel):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
 
 
-class MenuItem(models.Model):
+class MenuItem(AbstractSoftDeletableModel):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name="items")
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
@@ -36,7 +37,7 @@ class MenuItem(models.Model):
         return self.name
 
 
-class ItemCategory(models.Model):
+class ItemCategory(AbstractSoftDeletableModel):
     item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     position = models.PositiveIntegerField(default=0)
@@ -45,7 +46,7 @@ class ItemCategory(models.Model):
         unique_together = ("item", "category")
 
 
-class ItemOption(models.Model):
+class ItemOption(AbstractSoftDeletableModel):
     item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     option = models.ForeignKey(Option, on_delete=models.CASCADE)
     price_delta = models.DecimalField(max_digits=6, decimal_places=2, default=0)

@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from catalogs.models import Restaurant, MenuItem
+from abstracts.models import AbstractSoftDeletableModel
 
 
-class Address(models.Model):
+class Address(AbstractSoftDeletableModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses")
     city = models.CharField(max_length=100)
     street = models.CharField(max_length=100)
@@ -13,7 +14,7 @@ class Address(models.Model):
         return f"{self.city}, {self.street}, {self.building}"
 
 
-class PromoCode(models.Model):
+class PromoCode(AbstractSoftDeletableModel):
     code = models.CharField(max_length=50, unique=True)
     discount_percent = models.PositiveIntegerField(default=0)
 
@@ -21,7 +22,7 @@ class PromoCode(models.Model):
         return self.code
 
 
-class Order(models.Model):
+class Order(AbstractSoftDeletableModel):
     STATUS_CHOICES = [
         ("new", "New"),
         ("confirmed", "Confirmed"),
@@ -44,7 +45,7 @@ class Order(models.Model):
         return f"Order #{self.id} ({self.status})"
 
 
-class OrderItem(models.Model):
+class OrderItem(AbstractSoftDeletableModel):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")
     item_name = models.CharField(max_length=100)
     item_price = models.DecimalField(max_digits=8, decimal_places=2)
@@ -55,13 +56,13 @@ class OrderItem(models.Model):
         return f"{self.item_name} x{self.quantity}"
 
 
-class OrderItemOption(models.Model):
+class OrderItemOption(AbstractSoftDeletableModel):
     order_item = models.ForeignKey(OrderItem, on_delete=models.CASCADE, related_name="options")
     option_name = models.CharField(max_length=100)
     price_delta = models.DecimalField(max_digits=6, decimal_places=2, default=0)
 
 
-class OrderPromo(models.Model):
+class OrderPromo(AbstractSoftDeletableModel):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     promo_code = models.ForeignKey(PromoCode, on_delete=models.CASCADE)
     applied_amount = models.DecimalField(max_digits=8, decimal_places=2, default=0)
