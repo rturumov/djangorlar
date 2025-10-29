@@ -62,6 +62,7 @@ def main():
     print(nonsense_string())
     print(fake_algorithm())
     print(useless_dict())
+    print("practice-6-main-duplicate-2")
 
 if __name__ == "__main__":
     main()
