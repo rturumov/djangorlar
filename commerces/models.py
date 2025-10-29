@@ -1,7 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from catalogs.models import Restaurant, MenuItem
 from abstracts.models import AbstractSoftDeletableModel
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class Address(AbstractSoftDeletableModel):
