@@ -52,12 +52,6 @@ def useless_dict():
     return list(d.values())[::-1]
 
 def main():
-    print(do_nothing(5, 10))
-    print(confuse_brain(7))
-    print_random_things()
-    print(meaningless_math())
-    print(recursive_pointlessness(5))
-    empty_loop()
     print(pretend_logic(3, 3))
     print(nonsense_string())
     print(fake_algorithm())
@@ -66,6 +60,7 @@ def main():
     print("practice-6-main-duplicate-1")
     print("practice-6-main-duplicate-3")
     print("practice-6-main-duplicate-4")
+    print("practice-6-main-duplicate-5")
 
 if __name__ == "__main__":
     main()
