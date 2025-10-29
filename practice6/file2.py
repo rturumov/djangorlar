@@ -64,6 +64,7 @@ def main():
     print(useless_dict())
     print("practice-6-main-duplicate-2")
     print("practice-6-main-duplicate-1")
+    print("practice-6-main-duplicate-3")
 
 if __name__ == "__main__":
     main()
